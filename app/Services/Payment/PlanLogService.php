@@ -18,6 +18,6 @@ class PlanLogService
 
     public function getSinglePlanLog(string $id)
     {
-        return $this->planLogModel->newQuery()->firstOrFail($id);
+        return $this->planLogModel->newQuery()->findOrFail($id);
     }
 }

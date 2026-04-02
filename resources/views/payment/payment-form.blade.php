@@ -47,8 +47,8 @@
                                 <div id="methodDropdown" class="hidden absolute w-full mt-2 bg-white border rounded-md shadow-lg z-[9999]">
 
                                     @foreach($paymentMethods as $method)
-                                    <div class="method-option px-4 py-2 hover:bg-gray-100 cursor-pointer" data-value="{{ $method }}">
-                                        {{ ucfirst($method) }}
+                                    <div class="method-option px-4 py-2 hover:bg-gray-100 cursor-pointer" data-value="{{ strtolower($method) }}">
+                                        {{ strtolower($method) }}
                                     </div>
                                     @endforeach
                                 </div>
