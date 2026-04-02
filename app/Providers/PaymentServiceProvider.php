@@ -10,6 +10,9 @@ use Illuminate\Support\ServiceProvider;
 
 class PaymentServiceProvider extends ServiceProvider
 {
+    /**
+     * Register any application services.
+     */
     public function register()
     {
         $this->app->bind(PaymentGatewayInterface::class, function ($app) {
@@ -21,5 +24,13 @@ class PaymentServiceProvider extends ServiceProvider
                 default => throw new \Exception('Invalid Payment Gateway'),
             };
         });
+    }
+
+    /**
+     * Bootstrap any application services.
+     */
+    public function boot(): void
+    {
+        //
     }
 }
