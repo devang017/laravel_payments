@@ -6,6 +6,7 @@ use App\Interfaces\Payment\PaymentGatewayInterface;
 use App\Services\Payment\PlanLogService;
 use App\Services\Payment\PlanTypeService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StripePaymentController extends Controller
 {
@@ -13,7 +14,7 @@ class StripePaymentController extends Controller
 
     public function pay()
     {
-        $user = auth()->user();
+        $user = Auth::user();
         $planTypes = $this->planTypeService->getAllPlanTypes();
         $paymentMethods = config('params.payment_methods');
 
