@@ -17,7 +17,7 @@
             <div class="bg-white overflow-visible shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    <form method="post" action="{{ route('stripe.init') }}" class="mt-6 space-y-6">
+                    <form method="post" action="{{ route('payment.init') }}" class="mt-6 space-y-6">
                         @csrf
                         @method('post')
                         <input type="hidden" name="user_id" value="{{ $user->id }}">

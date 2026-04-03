@@ -7,39 +7,10 @@ use App\Services\Payment\PlanTypeService;
 use App\Services\Payment\StripePaymentService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class StripePaymentController extends Controller
 {
     public function __construct(protected PlanTypeService $planTypeService, protected PlanLogService $planLogService, protected StripePaymentService $paymentService, protected UserService $userService) {}
-
-    public function pay()
-    {
-        $user = Auth::user();
-        $planTypes = $this->planTypeService->getAllPlanTypes();
-        $paymentMethods = config('params.payment_methods');
-
-        return view('payment.payment-form', compact('user', 'planTypes', 'paymentMethods'));
-    }
-
-    public function paymentInit(Request $request)
-    {
-        $plan = $this->planTypeService->getSinglePlanType($request->plan_id);
-
-        $data = [
-            'user_id' => $request->user_id,
-            'plan_id' => $plan->id,
-            'amount' => $plan->price,
-            'gateway' => $plan->gateway,
-            'start_date' => now(),
-            'end_date' => now()->addMonths($plan->duration_month),
-            'status' => 0,
-        ];
-
-        $log = $this->planLogService->createPlanLog($data);
-
-        return redirect()->route('stripe.session', [$log->user_id, $log->id]);
-    }
 
     public function session(string $userId, string $logId)
     {
