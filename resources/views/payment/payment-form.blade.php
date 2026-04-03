@@ -53,7 +53,7 @@
                                     @endforeach
                                 </div>
 
-                                <input type="hidden" name="gateway" id="gateway" value="{{ $defaultMethod }}">
+                                <input type="hidden" name="gateway" id="gateway" value="{{ strtolower($defaultMethod) }}">
                             </div>
                         </div>
 

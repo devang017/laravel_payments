@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Interfaces\Payment\PaymentGatewayInterface;
 use App\Services\Payment\PlanLogService;
 use App\Services\Payment\PlanTypeService;
+use App\Services\Payment\StripePaymentService;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class StripePaymentController extends Controller
 {
-    public function __construct(protected PlanTypeService $planTypeService, protected PlanLogService $planLogService, protected PaymentGatewayInterface $paymentService) {}
+    public function __construct(protected PlanTypeService $planTypeService, protected PlanLogService $planLogService, protected StripePaymentService $paymentService, protected UserService $userService) {}
 
     public function pay()
     {
@@ -29,6 +30,7 @@ class StripePaymentController extends Controller
             'user_id' => $request->user_id,
             'plan_id' => $plan->id,
             'amount' => $plan->price,
+            'gateway' => $plan->gateway,
             'start_date' => now(),
             'end_date' => now()->addMonths($plan->duration_month),
             'status' => 0,
@@ -55,6 +57,17 @@ class StripePaymentController extends Controller
         }
 
         $result = $this->paymentService->handleSuccess($request->session_id, $logId, $userId);
+
+        if ($result['status'] == 'success') {
+
+            $planLog = $this->planLogService->getSinglePlanLog($userId);
+
+            $this->userService->updateUser($userId, [
+                'plan_status' => (($planLog->status == 1) ? 1 : 0),
+                'plan_start_date' => $planLog->start_date ?? null,
+                'plan_end_date' => $planLog->end_date
+            ]);
+        }
 
         return redirect()->route('dashboard')->with($result['status'], $result['message']);
     }

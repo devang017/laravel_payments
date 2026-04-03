@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('plan_id')->nullable();
             $table->decimal('amount', 12, 2)->nullable();
-            $table->char('ref_id', 40)->nullable();
+            $table->string('ref_id', 255)->nullable();
             $table->string('gateway', 50)->nullable();
             $table->text('logs')->nullable();
             $table->tinyInteger('status')->default(0)->comment('0 = pending, 1 = success, 2 = cancelled');

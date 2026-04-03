@@ -17,11 +17,11 @@ class PlanTypeService
 
     public function getAllPlanTypes()
     {
-        return $this->planTypeModel->newQuery()->get();
+        return $this->planTypeModel->get();
     }
 
     public function getSinglePlanType(string $id)
     {
-        return $this->planTypeModel->newQuery()->findOrFail($id);
+        return $this->planTypeModel->findOrFail($id);
     }
 }

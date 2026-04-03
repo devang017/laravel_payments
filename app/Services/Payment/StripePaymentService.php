@@ -2,13 +2,13 @@
 
 namespace App\Services\Payment;
 
-use App\Interfaces\Payment\PaymentGatewayInterface;
 use App\Models\UserPlanLog;
+use App\Services\UserService;
 use Stripe\Checkout\Session;
 use Stripe\PaymentIntent;
 use Stripe\Stripe;
 
-class StripePaymentService implements PaymentGatewayInterface
+class StripePaymentService
 {
     protected $planLogModel;
 
@@ -72,7 +72,7 @@ class StripePaymentService implements PaymentGatewayInterface
             ->update([
                 'ref_id' => $session->id,
                 'user_id' => $userId,
-                'status' => 0,
+                'status' => 2,
                 'logs' => json_encode($session->toArray()),
             ]);
     }
