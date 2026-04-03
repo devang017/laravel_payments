@@ -3,7 +3,6 @@
 namespace App\Services\Payment;
 
 use App\Models\UserPlanLog;
-use App\Services\UserService;
 use Stripe\Checkout\Session;
 use Stripe\PaymentIntent;
 use Stripe\Stripe;
