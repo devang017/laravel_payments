@@ -6,10 +6,14 @@ use App\Models\PlanType;
 
 class PlanTypeService
 {
+    protected $planTypeModel;
     /**
      * Create a new class instance.
      */
-    public function __construct(protected PlanType $planTypeModel) {}
+    public function __construct()
+    {
+        $this->planTypeModel = new PlanType();
+    }
 
     public function getAllPlanTypes()
     {

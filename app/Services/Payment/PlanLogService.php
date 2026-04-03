@@ -6,10 +6,14 @@ use App\Models\UserPlanLog;
 
 class PlanLogService
 {
+    protected $planLogModel;
     /**
      * Create a new class instance.
      */
-    public function __construct(protected UserPlanLog $planLogModel) {}
+    public function __construct()
+    {
+        $this->planLogModel = new UserPlanLog();
+    }
 
     public function createPlanLog(array $planLogArr)
     {

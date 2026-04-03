@@ -10,9 +10,13 @@ use Stripe\Stripe;
 
 class StripePaymentService implements PaymentGatewayInterface
 {
-    public function __construct(protected UserPlanLog $planLogModel)
+    protected $planLogModel;
+
+    public function __construct()
     {
         Stripe::setApiKey(config('services.stripe.secret_key'));
+
+        $this->planLogModel = new UserPlanLog();
     }
 
     public function createSession(UserPlanLog $log, string $userId): string
