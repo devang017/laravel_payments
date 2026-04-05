@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PaypalPaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StripePaymentController;
 use Illuminate\Support\Facades\Route;
@@ -20,9 +21,14 @@ Route::middleware('auth')->group(function () {
 
     Route::get('payment/pay-form', [PaymentController::class, 'pay'])->name('payment.form');
     Route::post('payment/init-payment', [PaymentController::class, 'paymentInit'])->name('payment.init');
+
     Route::get('stripe/checkout-session/{user_id}/{log_id}', [StripePaymentController::class, 'session'])->name('stripe.session');
     Route::get('stripe/checkout-success/{user_id}/{log_id}', [StripePaymentController::class, 'success'])->name('stripe.success');
     Route::get('stripe/checkout-cancel/{user_id}/{log_id}', [StripePaymentController::class, 'cancel'])->name('stripe.cancel');
+
+    Route::get('paypal/payment/{user_id}/{log_id}', [PaypalPaymentController::class, 'payment'])->name('paypal.payment');
+    Route::get('paypal/success/{user_id}/{log_id}', [PaypalPaymentController::class, 'success'])->name('paypal.success');
+    Route::get('paypal/cancel/{user_id}/{log_id}', [PaypalPaymentController::class, 'cancel'])->name('paypal.cancel');
 });
 
 require __DIR__ . '/auth.php';

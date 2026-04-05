@@ -25,7 +25,7 @@ class PaymentController extends Controller
     {
         $plan = $this->planTypeService->getSinglePlanType($request->plan_id);
 
-        $gateway = $plan->gateway;
+        $gateway = $request->gateway;
 
         $data = ['user_id' => $request->user_id, 'plan_id' => $plan->id, 'amount' => $plan->price, 'gateway' => $gateway, 'start_date' => now(), 'end_date' => now()->addMonths($plan->duration_month), 'status' => 0];
 
@@ -35,12 +35,12 @@ class PaymentController extends Controller
             case 'stripe':
                 return redirect()->route('stripe.session', [$log->user_id, $log->id]);
                 break;
-            case 'stripe':
-                return redirect()->route('paypal.session', [$log->user_id, $log->id]);
+            case 'paypal':
+                return redirect()->route('paypal.payment', [$log->user_id, $log->id]);
                 break;
 
             default:
-                # code...
+                return redirect()->back();
                 break;
         }
     }

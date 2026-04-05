@@ -4,8 +4,70 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c4273ab335caa5732c1aa365ea857a50",
+    "content-hash": "32defa0ad881527859d76df5dfe34bf3",
     "packages": [
+        {
+            "name": "blendbyte/paypal",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/blendbyte/laravel-paypal.git",
+                "reference": "32b3018398eebc8df9cac795a96f080fb221f146"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/blendbyte/laravel-paypal/zipball/32b3018398eebc8df9cac795a96f080fb221f146",
+                "reference": "32b3018398eebc8df9cac795a96f080fb221f146",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "guzzlehttp/guzzle": "^7.9",
+                "illuminate/support": "^12.0|^13.0",
+                "nesbot/carbon": "^3.0",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "larastan/larastan": "^3.0",
+                "laravel/framework": "^12.0",
+                "laravel/pint": "^1.29",
+                "orchestra/testbench": "^10.0",
+                "pestphp/pest": "^3.0",
+                "phpunit/phpunit": "^11.0",
+                "symfony/var-dumper": "^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "PayPal": "Blendbyte\\PayPal\\Facades\\PayPal"
+                    },
+                    "providers": [
+                        "Blendbyte\\PayPal\\Providers\\PayPalServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Blendbyte\\PayPal\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Laravel package for processing payments through PayPal REST API.",
+            "keywords": [
+                "REST API",
+                "laravel",
+                "payments",
+                "paypal"
+            ],
+            "support": {
+                "source": "https://github.com/blendbyte/laravel-paypal/tree/v1.0.1"
+            },
+            "time": "2026-03-25T02:15:54+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.14.8",

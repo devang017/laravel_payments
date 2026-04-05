@@ -2,6 +2,7 @@
 
 return [
     'payment_methods' => [
-        'stripe' => 'Stripe'
+        'stripe' => 'Stripe',
+        'paypal' => 'PayPal'
     ]
 ];
