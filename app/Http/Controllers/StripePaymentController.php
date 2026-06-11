@@ -53,7 +53,7 @@ class StripePaymentController extends Controller
 
     public function stripeWebhook(Request $request)
     {
-        $endpoint_secret = 'whsec_04617a7096a210080fd1cd12a804f36aa4ba9247a8961674255eb637e5971281';
+        $endpoint_secret = Config('services.stripe.webhook_key');
 
         $payload = $request->getContent();
 
