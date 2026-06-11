@@ -33,6 +33,16 @@ class StripePaymentService
                 'quantity' => 1,
             ]],
             'mode' => 'payment',
+            'metadata' => [
+                'user_id' => $userId,
+                'log_id' => $log->id,
+            ],
+            'payment_intent_data' => [
+                'metadata' => [
+                    'user_id' => $userId,
+                    'log_id' => $log->id,
+                ],
+            ],
             'success_url' => route('stripe.success', [$userId, $log->id]) . '?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => route('stripe.cancel', [$userId, $log->id]) . '?session_id={CHECKOUT_SESSION_ID}',
         ]);
@@ -73,6 +83,17 @@ class StripePaymentService
                 'user_id' => $userId,
                 'status' => 2,
                 'logs' => json_encode($session->toArray()),
+            ]);
+    }
+
+    public function updateLogManually(array $data)
+    {
+        $this->planLogModel->newQuery()
+            ->where('id', $data['log_id'])
+            ->update([
+                'ref_id' => $data['session_id'],
+                'status' => $data['status'],
+                'logs' => json_encode($data['session']),
             ]);
     }
 }
