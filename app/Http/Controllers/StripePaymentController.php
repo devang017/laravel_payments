@@ -7,7 +7,6 @@ use App\Services\Payment\PlanTypeService;
 use App\Services\Payment\StripePaymentService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class StripePaymentController extends Controller
 {
