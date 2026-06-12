@@ -100,16 +100,6 @@ class StripePaymentController extends Controller
                     'user_id' => $userId
                 ]);
 
-                Log::info('Stripe Request', [
-                    'checkout.session.completed' => [
-                        'log_id' => $logId,
-                        'session_id' => $session_id,
-                        'status' => 1,
-                        'session' => $session->toArray(),
-                        'user_id' => $userId
-                    ]
-                ]);
-
                 $planLog = $this->planLogService->getSinglePlanLog($logId);
 
                 $this->userService->updateUser($userId, [
